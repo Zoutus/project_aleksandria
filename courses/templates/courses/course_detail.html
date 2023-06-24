@@ -7,8 +7,12 @@
      <h2 class="card-title">{{ course.title }}</h2>
      <p class="card-text">{{ course.description }}</p>
      <p class="card-text">Cena: {{ course.price }}</p>
-     <p class="card-text">Data rozpoczęcia: {{ course.start_date }}</p>
+     <p class="card-text">Data rozpoczęcia: {{ course.start_data }}</p>
      <p class="card-text">Data zakończenia: {{ course.end_data }}</p>
+     <form method="post" action="{% url 'course-enroll' course.id %}">
+       {% csrf_token %}
+       <button type="submit" class="btn btn-primary">Zapisz się</button>
+     </form>
    </div>
   </div>
 

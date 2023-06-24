@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Course, Review
+from .models import Course, Review, Enrollment
+from django.contrib import messages
 
 def course_list(request):
     return render(request, 'courses/course_list.html', {"courses": Course.objects.all()})
@@ -33,4 +34,14 @@ def add_review(request, pk):
             comment=comment
         )
 
+    return redirect('course-detail', pk=pk)
+
+
+def add_enroll(request, pk): # /courses/<int:pk>/enroll/
+    course = Course.objects.get(id=pk)
+    enrollment, created = Enrollment.objects.get_or_create(user=request.user, course=course)
+    if created:
+        messages.success(request, 'You have successfully enrolled in the course.')
+    else:
+        messages.error(request, 'You are already enrolled in the course.')
     return redirect('course-detail', pk=pk)
