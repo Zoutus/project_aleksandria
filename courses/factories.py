@@ -14,7 +14,7 @@ class CourseFactory(factory.django.DjangoModelFactory):
 
     title = factory.Faker("sentence", nb_words=4)
     description = factory.Faker("text", max_nb_chars=250)
-    start_data = factory.Faker("date_object")
+    start_date = factory.Faker("date_object")
     end_data = factory.Faker("date_object")
     author = factory.SubFactory(UserFactory)
     price = factory.Faker("pydecimal", left_digits=4, right_digits=2, positive=True)
