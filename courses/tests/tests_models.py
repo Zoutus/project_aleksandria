@@ -23,6 +23,11 @@ class TestReviewModel(TestCase):
         expected_str = f"{self.review.user.username} - {self.review.course.title} - {self.review.rating}"
         self.assertEqual(str(self.review), expected_str)
 
+    def test_review_model_rating_different_than_1_5(self):
+        self.review.rating = 6
+        self.assertRaises(ValueError, self.review.save)
+
+
 
 class TestEnrollmentModel(TestCase):
     def setUp(self):
